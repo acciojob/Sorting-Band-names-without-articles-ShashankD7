@@ -1,28 +1,26 @@
-//your code here
-let touristSpots = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
-let arr = [], articles = [];
-for (let i=0; i<touristSpots.length; i++) {
-	let newArr = touristSpots.split(" ");
-	if (newArr[0] === "a" || newArr[0] === "an" || newArr[0] === "the") {
-		let str = "";
-		articles[i] = newArr[0];
-		for (let j=1; j<newArr.length; j++) {
-			str += newArr[j];
-		}
-		arr[i] = str;
-	}
-	else {
-		articles[i] = "";
-		arr[i] = touristSpots[i];
-	}
+let bandNames = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
+
+function removeArticles(bandName) {
+  const articles = ['a', 'an', 'the'];
+  const nameWords = bandName.split(' ');
+
+  // Remove articles from the band name
+  const filteredWords = nameWords.filter(word => !articles.includes(word.toLowerCase()));
+
+  // Join the remaining words back into a string
+  const filteredName = filteredWords.join(' ');
+
+  return filteredName;
 }
 
-Arrays.sort(arr);
+// Sort the band names in lexicographic order excluding articles
+bandNames.sort((a, b) => removeArticles(a).localeCompare(removeArticles(b)));
 
-let finalArr = articles+arr;
-let ulElement = document.getElementByTagName("ul");
-for (let i=0; i<finalArr.length; i++) {
-	let newLi = document.createElement("li");
-	newLi.innerText = finalArr[i];
-	ulElement.append(newLi);
-}
+// Generate the HTML list
+const ul = document.getElementById('band');
+
+bandNames.forEach(name => {
+  const li = document.createElement('li');
+  li.innerText = name;
+  ul.appendChild(li);
+});
