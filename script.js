@@ -19,4 +19,10 @@ for (let i=0; i<touristSpots.length; i++) {
 
 Arrays.sort(arr);
 
-return articles+arr;
+let finalArr = articles+arr;
+let ulElement = document.getElementByTagName("ul");
+for (let i=0; i<finalArr.length; i++) {
+	let newLi = document.createElement("li");
+	newLi.innerText = finalArr[i];
+	ulElement.append(newLi);
+}
